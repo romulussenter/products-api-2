@@ -3,7 +3,7 @@ const serverApp = express();
 
 const PORT = process.env.PORT || 5000; // necessary for huroku deployment
 
-//Routers 
+//Routers   
 
 const productRouter = require('./routers/products');
 
