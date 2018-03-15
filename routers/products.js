@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mockProducts = require('../mocks/products');
+
 const productArrToObj = (arrayOfProducts) => {
     // create an accumulator obj 
     const accumulator = {};
@@ -37,5 +38,23 @@ router.get('/products/:id',(req, res) => {
         }
     })
 })
+//post means create
+router.post('/products', (req, res) => {
+    const productObject = productArrToObj(mockProducts);
+    const id = 1000000 * Math.random();
+    const newProduct = {
+        _id: id,
+        name: 'something',
+        Price: 1000,
+        created: new Date(),
+        imgSRC: 'https://via.placeholder.com/250x250'
+    }
+    mockProducts.push(newProduct);
+    res.status(201).json({
+    msg: 'created product!'
+    })
+    
+})
+
 
 module.exports = router; // like export default 
