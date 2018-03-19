@@ -18,6 +18,9 @@ serverApp.use(productRouter); //register the router with the application
 serverApp.get('/', (req, res) => {
      res.send('AMAZING');
 });
+serverApp.use(function notFoundHandler(req, res, next){
+   res.status(404).send('Nothing to see here');
+});
 
 serverApp.listen(PORT, () => {
     console.log(`now listening on port ${PORT}` );
