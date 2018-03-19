@@ -88,7 +88,7 @@ router.post('/products', (req, res) => {
  
 })
 
-router.put('product:id', (req, res) => {
+router.put('/products/:id', (req, res) => {
  const {id} = req.params;
  const update = {
      name: 'updated name'
@@ -107,7 +107,7 @@ router.put('product:id', (req, res) => {
     });
 });
 
-router.delete('/products/id:,', (req, res) => {
+router.delete('/products/:id', (req, res) => {
     const { id } = req.params;
     Product.findByIdAndRemove(id)
         .then(response => {
