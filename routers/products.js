@@ -89,12 +89,27 @@ router.post('/products', (req, res) => {
 })
 
 router.put('product:id', (req, res) => {
+ const {id} = req.params;
+ const update = {
+     name: 'updated name'
 
-})
+ };
+ Product.findByIdAndUpdate(id, update)
+    .then(response => {
+        res.status(200).json({
+            msg: 'You have been updated'
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            msg: 'broke'
+        })
+    });
+});
 
 router.delete('/products/id:,', (req, res) => {
-    const { } = req.params;
-    Product.findByIdAndRemove()
+    const { id } = req.params;
+    Product.findByIdAndRemove(id)
         .then(response => {
             res.status(200).json({
                 msg: 'Successfully deleted'
