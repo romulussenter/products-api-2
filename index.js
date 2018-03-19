@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 //middleware imports
 const logger =require('./middlewares/logger');
+const  notFound =require('./middlewares/404');
 mongoose.connect(process.env.MONGO_URI);
 const PORT = process.env.PORT || 5000; // necessary for huroku deployment
 
@@ -18,9 +19,7 @@ serverApp.use(productRouter); //register the router with the application
 serverApp.get('/', (req, res) => {
      res.send('AMAZING');
 });
-serverApp.use(function notFoundHandler(req, res, next){
-   res.status(404).send('Nothing to see here');
-});
+serverApp.use(notFound);
 
 serverApp.listen(PORT, () => {
     console.log(`now listening on port ${PORT}` );
