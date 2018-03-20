@@ -87,7 +87,9 @@ router.post('/products', (req, res, next) => {
 router.put('/products/:id', (req, res, next) => {
  const {id} = req.params;
  const update = {
-     name: 'updated name'
+     name: req.body.name,
+     price: req.body.price,
+     imgSrc: req.body.imgSrc
 
  };
  Product.findByIdAndUpdate(id, update)
