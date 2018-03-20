@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 //middleware imports
+const bodyParser =require('body-parser');
 const logger =require('./middlewares/logger');
 const  notFound =require('./middlewares/404');
 const serverError = require('./middlewares/serverError');
@@ -16,13 +17,15 @@ const PORT = process.env.PORT || 5000; // necessary for huroku deployment
 //Routers   
 
 const productRouter = require('./routers/products');
-
+serverApp.use(bodyParser.json())
+serverApp.use(bodyParser.urlencoded({ extended: true}));
 serverApp.use(logger);
 serverApp.use(productRouter); //register the router with the application
 
 serverApp.get('/', (req, res) => {
      res.send('AMAZING');
 });
+
 serverApp.use(notFound);
 serverApp.use(serverError);
 
